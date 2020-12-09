@@ -1,0 +1,2 @@
+G:\Programs\dp\Debug\dp.exe
+G:\Programs\dp\Debug\dp.pdb
