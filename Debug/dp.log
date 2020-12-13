@@ -1,4 +1,2 @@
 ﻿  dp.cpp
-G:\Programs\dp\dp.cpp(18,17): warning C4101: st: неиспользованная локальная переменная
-G:\Programs\dp\dp.cpp(72,21): warning C4018: <: несоответствие типов со знаком и без знака
   dp.vcxproj -> G:\Programs\dp\Debug\dp.exe

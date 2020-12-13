@@ -7,15 +7,16 @@
 
 using namespace std;
 
-vector<string> th = { "Время выполнения", "Задача", "Сложность" };
-int n;
+vector<string> th = {"Время выполнения", "Задача", "Сложность" };
+int n, w, q;
 string e, r, t;
 const int N = 1;
 vector<string> A[N];
 vector<string> vec;
 
+
 void show_time() {
-	SYSTEMTIME lt, st;
+	SYSTEMTIME lt;
 	GetLocalTime(&lt);
 	printf("Date: %02d.%02d.%02d\n", lt.wDay, lt.wMonth, lt.wYear);
 }
@@ -24,66 +25,63 @@ void objectives_list_generation() {
 	vector<string> th = { "Время выполнения", "Задача", "Сложность" };
 }
 
-void add_new_objective(vector<string> p) 
+void add_new_objective() 
 {
-	cin >> e >> r >> t;
-	vec.push_back(e);
-	vec.push_back(r);
+	string t, o, d;
+	cin >> t >> o >> d;
 	vec.push_back(t);
+	vec.push_back(o);
+	vec.push_back(d);
 	for (int i = 0; i < N; i++) {
 		A[i] = vec;
 	}
 }
 
-void sort_objectives() {
-
-}
-
-void print_all() {
+void print_all() 
+{
+	setlocale(LC_ALL, "rus");
 	for (int i = 0; i < 3; i++) {
 		cout << th[i] << "\t\t\t ";
 	}
 	cout << endl;
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < vec.size(); j++) {
-			cout << A[i][j] << "\t\t";
+		for (int j = 0; j < vec.size(); ) {
+			cout << A[i][j] << "\t\t\t" << A[i][j + 1] << "\t\t\t" << A[i][j + 2] << endl;
+			j += 3;
 		}
-		cout << endl;
 	}
-	cout << endl;
+	
 }
 
 void delete_objective() {
-	th.pop_back();
-}
-
-void complete_objective() {
-
+	
 }
 
 void choice_action() {
 again:
 	cin >> n;
-	if (n > 0 && n <= 4)
 	{
 		switch (n) {
 		case 1:
+			cout << "Список задач" << endl;
 			print_all();
 			break;
 		case 2:
-		{vector<string> p;
-		add_new_objective(p); }
-		break;
+			cout << "Добавление новой задачи" << endl;
+			{
+			add_new_objective(); }
+			break;
 		case 3:
+			cout << "Удаление задачи" << endl;
 			delete_objective();
 			break;
 		case 4:
-			complete_objective();
+			system("cls");
+			break;
+		default:
+			goto again;
 			break;
 		}
-	}
-	else {
-		goto again;
 	}
 }
 
@@ -91,7 +89,7 @@ int main()
 {
 	setlocale(LC_ALL, "rus");
 	show_time();
-	do { choice_action(); } while (true);
+	cout << "Выберите действие:\n1)Посмотреть список задач\n2)Добавить новую задачу\n3)Удалить задачу\n4) Очистить консоль" << endl;
+	do { choice_action(); } while (true || false);
 	objectives_list_generation();
-	sort_objectives();
 }
