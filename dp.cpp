@@ -10,9 +10,7 @@ using namespace std;
 
 vector<string> th = { "Время выполнения", "Задача", "Сложность", "Статус" }; //Над статусом надо ещё поработать,потому что создали его только недавно
 char n;
-const int N = 1;
-vector<string> A[N];
-vector<string> vec;
+vector<string> a;
 
 void show_time() { //Показывает дату
 	SYSTEMTIME lt;
@@ -25,10 +23,7 @@ void add_new_objective() //Добавление новой задачи
 	string s;
 	for (int i = 0; i < 3; i++) {
 		cin >> s;
-		vec.push_back(s);
-	}
-	for (int i = 0; i < N; i++) {
-		A[i] = vec;
+		a.push_back(s);
 	}
 }
 
@@ -39,22 +34,19 @@ void print_all() //Вывод таблицы
 		cout << th[i] << "\t\t\t ";
 	}
 	cout << endl;
-	for (int i = 0; i < N; i++) {
-		for (size_t j = 0; j < vec.size(); ) {
-			cout << A[i][j] << "\t\t\t" << A[i][j + 1] << "\t\t\t" << A[i][j + 2] << endl;
-			j += 3;
-		}
+	for (int i(0); i < a.size(); ) {
+		cout << a[i] << " " << a[i + 1] << " " << a[i + 2] << endl;
+		i += 3;
 	}
 
 }
 
-void deleteObjective() { //Удаление задачи(проблема в этой функции,так как у нас не получается удалить задачу)
-	int i = 0;
-	cout << "Введите номер для удаления" << endl;
-	cin >> i;
-	for (int j = 0; j < 3; j++) {
-		A[i - 1].erase(A->begin(), A->end() - 3);
-	}
+void delete_objective() {
+	int k;
+	cin >> k;
+	if ((k * 3) <= a.size())
+		a.erase(a.begin() + (k * 3) - 3, a.begin() + (k * 3));
+	else cout << "Такой задачи нет!" << endl;
 }
 
 void choice_action() { //Выбор действия в консоли
@@ -71,13 +63,13 @@ void choice_action() { //Выбор действия в консоли
 			break;
 		case '3':
 			cout << "Удаление задачи" << endl;
-			deleteObjective();
+			delete_objective();
 			break;
 		case '4':
 			system("cls");
 			break;
 		case '5':
-			cout << "Удаление всего вектора" << endl;
+			a.clear();
 		default:
 			break;
 		}
@@ -87,10 +79,10 @@ void choice_action() { //Выбор действия в консоли
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	show_time();
 
 	while (true)
 	{
+		show_time();
 		cout << "Выберите действие:\n1)Посмотреть список задач\n2)Добавить новую задачу\n3)Удалить задачу\n4) Очистить консоль\n5)Удалить вектор" << endl;
 		choice_action();
 	}
