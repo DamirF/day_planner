@@ -15,7 +15,7 @@ vector<string> a;
 void show_time() { //Показывает дату
 	SYSTEMTIME lt;
 	GetLocalTime(&lt);
-	printf("Date: %02d.%02d.%02d\n", lt.wDay, lt.wMonth, lt.wYear);
+	printf("Date: %02d.%02d.%02d\n\n", lt.wDay, lt.wMonth, lt.wYear);
 }
 
 void add_new_objective() //Добавление новой задачи
@@ -35,7 +35,7 @@ void print_all() //Вывод таблицы
 	}
 	cout << endl;
 	for (int i(0); i < a.size(); ) {
-		cout << a[i] << " " << a[i + 1] << " " << a[i + 2] << endl;
+		cout << a[i] << "\t" << a[i + 1] << "\t" << a[i + 2] << "\n" << endl;
 		i += 3;
 	}
 
@@ -46,7 +46,7 @@ void delete_objective() {
 	cin >> k;
 	if ((k * 3) <= a.size())
 		a.erase(a.begin() + (k * 3) - 3, a.begin() + (k * 3));
-	else cout << "Такой задачи нет!" << endl;
+	else cout << "Такой задачи нет!\n" << endl;
 }
 
 void choice_action() { //Выбор действия в консоли
@@ -54,22 +54,26 @@ void choice_action() { //Выбор действия в консоли
 	{
 		switch (n) {
 		case '1':
-			cout << "Список задач" << endl;
+			cout << "Список задач\n" << endl;
 			print_all();
 			break;
 		case '2':
-			cout << "Добавление новой задачи" << endl;
+			cout << "Добавление новой задачи\n" << endl;
 			add_new_objective();
 			break;
 		case '3':
-			cout << "Удаление задачи" << endl;
+			cout << "Удаление задачи\n" << endl;
 			delete_objective();
 			break;
 		case '4':
 			system("cls");
 			break;
 		case '5':
-			a.clear();
+			cout << "Для подтверждения действия введите: 1" << endl;
+			char confirmation;
+			cin >> confirmation;
+			if (confirmation == '1') a.clear();
+			else cout << "Действие не подтверждено\n\n" << endl;
 		default:
 			break;
 		}
@@ -83,7 +87,7 @@ int main()
 	while (true)
 	{
 		show_time();
-		cout << "Выберите действие:\n1)Посмотреть список задач\n2)Добавить новую задачу\n3)Удалить задачу\n4) Очистить консоль\n5)Удалить вектор" << endl;
+		cout << "Выберите действие:\n\n1)Посмотреть список задач\n\n2)Добавить новую задачу\n\n3)Удалить задачу\n\n4) Очистить консоль\n\n5)Удалить все задачи\n" << endl;
 		choice_action();
 	}
 }
